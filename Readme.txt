@@ -1,0 +1,34 @@
+Readme:
+
+Opinca-Banut Fineas:
+
+-cod: python,php,css,html,javascript;
+
+-montat piese cablaj;
+
+-conectare piese electronice la site prin intermediul raspberry pi pico si raspberry pi 5;
+
+
+Biblioteci și tehnologii folosite:
+
+     AccelStepper.h – utilizată pe Raspberry Pi Pico pentru controlul precis al motorului pas cu
+                      pas.
+
+     1-Wire – activat pe Raspberry Pi 5 pentru a citi datele de la senzorul de temperatură.
+
+     mjpg-streamer – folosit pentru a transmite live imaginea de la camera video pe interfața
+                     web.
+
+     Johnson.js – utilizată în partea de JavaScript pentru arhivarea sau gestionarea datelor în
+                  fundal (ex: stocarea temporară a stadiului procesului sau a rețetelor).
+
+
+Bogdan-Luca Radu:
+
+-creare piese 3D,am folosit SketchUp pentru modelare si Bambu Lab P1S pentru printare;
+
+-adaptare brat robotic la cerintele sistemului nostru;
+
+-realizarea cadrului de lemn;
+
+-proiectat cablaj placa;
