@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all ease .3s;
+        }
+        body {
+            background: #c8f7f7;
+            background: linear-gradient(125deg, rgba(200, 247, 247, 1) 0%, rgb(187, 187, 187) 100%);
+            background-size: cover;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main-container {
+            position: relative;
+            width: 40vw;
+            height: 70vh;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 2em;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            padding: 1vw;
+            justify-content: space-evenly;
+        }
+        @media (max-width: 1900px) {
+        .main-container{
+            width: 70vw;
+        }
+        }
+
+        @media (max-width: 600px) {
+        .main-container {
+            width: 100vw;
+        }
+        }
+        h1{
+            user-select: none;
+            font-size: 3em;
+            color: #6ed8e6;
+            text-align: center;
+            margin-top: 20px;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        .message {
+            width: 80%;
+            height: 50px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap:1vw;
+        }
+        .message input {
+            padding: 1vw;
+            width: 100%;
+            height: 100%;
+            border-radius: 1em;
+            border: none;
+        }
+        .message input:focus, .person input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(110, 216, 230, 0.5);
+        }
+        .message button {
+            width: 20%;
+            height: 100%;
+            border-radius: 1em;
+            border: none;
+            background-color: #6ed8e6;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .message button:hover {
+            background-color: #5ac0c9;
+        }
+        .history {
+            gap:.5em;
+            width: 80%;
+            height: 50%;
+            margin-top: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+             font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+             height: 50vh
+        }
+        .old-message{
+            background-color: rgba(27, 149, 158, 0.178);
+            border-radius: .31em;
+            padding: .3vw;
+        }
+        .person{
+            user-select: none;
+            padding: .4em .8em;
+            border-radius: .4em;
+            background-color: rgba(118, 226, 226, 0.521);
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: #646464;
+            width: 80%;
+            display: flex;
+            align-items: center;
+            gap: 1em;
+        }
+        .person input {
+            width: 20%;
+            padding: 0.5em;
+            border-radius: 0.4em;
+            border: none;
+            font-size: 1em;
+        }
+        .error {
+            border: 2px solid red;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+
+    </style>
+    </head>
+    <body>
+        <div class="main-container">
+            <h1>HEY!</h1>
+            <div class="person"><h2>My name is </h2><input type="text" placeholder=""></div>
+            <div class="message">
+                <input type="text" placeholder="Message here...">
+                <button>Send</button>
+            </div>
+            <div class="history">
+                <h2>Message History</h2>
+            </div>
+        </div>
+    </body>
+    <script async defer>
+        const start = async () =>{
+            const json = await fetch('http://12a.lmvineu.ro:7780/opticlean/get_messages.php', { method: 'GET'})
+            const data = await json.json();
+            console.log(data);
+            data.sort((a, b) => b.id - a.id);
+            if (!json.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const history = document.querySelector('.history');
+            history.innerHTML = '<h2>Message History</h2>';
+            data.forEach(message => {
+                const mes = document.createElement('div');
+                const det = document.createElement('p');
+                const text = document.createElement('p');
+                mes.classList.add('old-message')
+                text.textContent = message.text;
+                det.textContent = `${message.time} - ${message.author || 'Unknown'}`;
+                mes.appendChild(det);
+                mes.appendChild(text);
+                
+                history.appendChild(mes);
+            });
+            const person = document.querySelector('.person input');
+            const input = document.querySelector('.message input');
+            const button = document.querySelector('.message button');
+            button.addEventListener('click', async () => {
+                let ret = false;
+                if (input.value.trim() === '') {
+                    input.classList.add('error', true);
+                    ret = true;
+                    setTimeout(() => {
+                        input.classList.remove('error');
+                    }, 1500);
+                }
+                if (person.value.trim() === '') {
+                    person.classList.add('error', true);
+                    ret = true;
+                    setTimeout(() => {
+                        person.classList.remove('error');
+                    }, 1500);
+                }
+                if (ret) return;
+                const response = await fetch('http://12a.lmvineu.ro:7780/opticlean/send_message.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: input.value, author: person.value })
+                });
+                if (response.ok) {
+                    input.value = '';
+                    start(); 
+                } else {
+                    throw new Error('Failed to send message');
+                }
+            });
+        }
+        start();
+    </script>
+</html>

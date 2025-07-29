@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="./login.css">
+    </head>
+    <body>
+        <div class="login-container">
+            <div class="choose-login-div">
+                <h1>Welcome to Opticlean!</h1>
+                <div onclick="switchContent('choose-login-div','log-in-div')" class="login-option option-log-in">Log in</div>
+                <div onclick="switchContent('choose-login-div','sign-up-div')" class="login-option option-sign-up">Sign Up</div>
+            </div>
+            <div class="log-in-div hidden">
+                <svg onclick="switchContent('log-in-div','choose-login-div')" class="back-arrow" width="40" height="40" fill="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m23.068 11.993-4.25-4.235-1.412 1.416 1.836 1.83-18.31-.002v2l18.305.002-1.821 1.827 1.416 1.412 4.236-4.25Z"></path>
+                </svg>
+                <h1>Log in</h1>
+                <div class="input-div-username "><input class="login-input-username login-input login" type="text"/></div>
+            </br>
+                <div class="input-div-password "><input class="login-input-password login-input login" type="password"/></div>
+                <div onclick="login()" class="login-submit-but">Done</div>
+            </div>
+            <div class="sign-up-div hidden">
+                <svg onclick="switchContent('sign-up-div','choose-login-div')" class="back-arrow" width="40" height="40" fill="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m23.068 11.993-4.25-4.235-1.412 1.416 1.836 1.83-18.31-.002v2l18.305.002-1.821 1.827 1.416 1.412 4.236-4.25Z"></path>
+                </svg>
+                <h1>Sign up</h1>
+                <div class="input-div-username"><input class="login-input-username login-input signup" type="text"/></div>
+            </br>
+                <div class="input-div-password"><input class="login-input-password login-input signup" type="password"/></div>
+            </br>
+                <div class="input-div-repeat-password"><input class="login-input-repeat-password login-input signup" type="password"/></div>
+                <div onclick="signup()" class="login-submit-but">Done</div>
+            </div>
+        </div>
+
+        <script src="loginScript.js" async defer></script>
+    </body>
+</html>

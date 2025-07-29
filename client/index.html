@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <script src="./sortable-min.js"></script>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+        <header class="header">
+            <h1>OPTI<span>CLEAN</span></h1>
+            <div class="log-in-but">
+                <!--<div class="log-in-but"></div>-->
+                <h2 id="user"></h2>
+                <svg class="log-out-but" onmouseover="handleLogoutButtonHover(event)" onmouseleave="handleLogoutButtonHoverLeave(event)"
+                width="40" height="40" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <path d="m16 17 5-5-5-5"></path>
+                <path d="M21 12H9"></path>
+                </svg>
+            </div>
+        </header>
+    <body>
+        <div id="unavailable">
+            <h1>Someone else is using OptiClean</h1>
+            <h3 onclick="reloadPage()">Reload page</h3>
+        </div>
+        <div class="all-container">
+        <div class="opti-commands">
+            <div class="commands-text"><h1>Commands </h1></div>
+            <div class="manual-controls controls">
+                <div onclick="toggleManualControls()" class="title">
+                    <svg width="40" height="40" fill="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m23.068 11.993-4.25-4.235-1.412 1.416 1.836 1.83-18.31-.002v2l18.305.002-1.821 1.827 1.416 1.412 4.236-4.25Z"></path>
+                    </svg>
+                    <h1>Manual</h1>
+                </div>
+                <div class="functions">
+                    <div class="function" onclick="sendCommand3('spray')"><h2>Spray</h2></div>
+                    <div class="function" onclick="sendCommand2('dry_on')"><h2>Dry on</h2></div>
+                    <div class="function" onclick="sendCommand2('dry_off')"><h2>Dry off</h2></div>
+                    <div class="function" onclick="sendCommand('start_ultrasunete')"><h2>Start/Stop Ultrasound</h2></div>
+                    <div class="function" onclick="sendCommand('start_temp')"><h2>Start/Stop Temp</h2></div>
+                    <div class="function" onclick="sendCommand2('pompa_on')"><h2>Start pompa</h2></div>
+                    <div class="function" onclick="sendCommand2('pompa_off')"><h2>Stop pompa</h2></div>
+                </div>
+            </div>
+            <div class="auto-controls controls">
+                <div onclick="toggleAutoControls()" class="title">
+                    <svg width="40" height="40" fill="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m23.068 11.993-4.25-4.235-1.412 1.416 1.836 1.83-18.31-.002v2l18.305.002-1.821 1.827 1.416 1.412 4.236-4.25Z"></path>
+                    </svg>
+                    <h1>Automatic</h1>
+                </div>
+                <div class="functions">
+                    <div onclick="useAuto()" class="function"><h2>Start</h2></div>
+                    <div class="function"><h2>Stop</h2></div>
+                </div>
+            </div>
+            <div class="preset-controls controls">
+                <div onclick="togglePresetControls()" class="title">
+                    <svg width="40" height="40" fill="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m23.068 11.993-4.25-4.235-1.412 1.416 1.836 1.83-18.31-.002v2l18.305.002-1.821 1.827 1.416 1.412 4.236-4.25Z"></path>
+                    </svg>
+                    <h1>Preset</h1>
+                </div>
+                <div class="functions">
+                    <div onclick="usePreset()" class="function"><h2>Start</h2></div>
+                    <div class="function"><h2>Stop</h2></div>
+                </div>
+            </div>
+        </div>
+        <div class="opti-live">
+            <div class="content">
+                <div class="preset">
+                    <h2>Cleaning preset</h2>
+                    <div onclick="handlePresetBut()" class="preset-but">
+                        <h3 id="selected-preset-name">None</h3>
+                        <svg width="40" height="40" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm0 7a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm0 7a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="line"><span></span></div>
+                <div class="live-camera">
+                      <img id="live-camera"src="./image.png" alt="Live Camera Feed"/>
+                </div>
+                <div class="live-temperature">
+                    <h4>Temperature:</h4>
+                    <h4 id="temp-value"></h4>
+                </div>
+            </div>
+        </div>
+        <script src="script.js" async defer></script>
+        </div>
+        <div class="preset-selection">
+            <div class="close-but-container">
+                <svg onclick="handleClosePresetSelection('list')" width="40" height="40" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="m6 6 12 12M6 18 18 6 6 18Z"></path>
+                </svg>
+            </div>
+            <div class="cleaning-presets-text"><h1>Cleaning Preset</h1></div>
+            <div class="presets-container">
+            </div>
+            <div class="new-preset-but-container">
+                <div onclick="handlePresetBut('new')" class="new-preset-but">
+                    <svg width="40" height="40" fill="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M12 6a1.2 1.2 0 0 1 1.2 1.2v3.6h3.6a1.2 1.2 0 1 1 0 2.4h-3.6v3.6a1.2 1.2 0 1 1-2.4 0v-3.6H7.2a1.2 1.2 0 1 1 0-2.4h3.6V7.2A1.2 1.2 0 0 1 12 6Z" clip-rule="evenodd"></path>
+                    </svg>
+                    <h3>New Preset</h3> 
+                </div>
+            </div>
+        </div>
+        <div class="create-new-preset-container">
+            <div id="new-edit-preset-container-title" class="title"><h1>Create preset</h1></div>
+            <div class="edit-preset">
+                <div class="preset-name"><input id="new-preset-name-input"type="text"></div>
+                <div class="preset-steps">
+                </div>
+            </div>
+            <div class="buttons">
+                <div onclick="createNewPreset()" class="preset-done">Done</div>
+                <div onclick="handlePresetBut('step')" class="preset-add-step">+</div>
+            </div>   
+            <p onclick="handleClosePresetSelection('new')" class="close-but">+</p>
+        </div>
+        <div class="step-type-selection">
+            <p onclick="handleClosePresetSelection('step')" class="close-but">+</p>
+            <div onclick="selectStepType(event)" class="dry step-type">Dry</div>
+            <div onclick="selectStepType(event)" class="wash step-type">Wash</div>
+            <div onclick="selectStepType(event)" class="shake step-type">Shake</div>
+            <div onclick="selectStepType(event)" class="spray step-type">Spray</div>
+            <div  class="time"><input id="new-step-time"type="number" ></div>
+            <div onclick="addStep()" class="done-but"><div>Done</div></div>
+        </div>
+        <div class="error">
+            <svg width="40" height="40" fill="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10Zm0-2a8 8 0 1 0 0-16.001A8 8 0 0 0 12 20Zm-1-5h2v2h-2v-2Zm0-8h2v6h-2V7Z"></path>
+            </svg>
+            <h3 class="error-text">Something went wrong!</h3>
+        </div>
+    </body>
+</html>

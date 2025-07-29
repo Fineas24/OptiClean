@@ -1,0 +1,26 @@
+                    <div class="preset-step">
+                        <svg onclick="handleDeleteStep(event)" onmouseover="handleStepDeleteHover(event)" onmouseleave="handleStepDeleteHoverLeave(event)" width="40" height="40" fill="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 8h16v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V8Zm2 2v10h12V10H6Zm3 2h2v6H9v-6Zm4 0h2v6h-2v-6ZM7 5V3a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v2h5v2H2V5h5Zm2-1v1h6V4H9Z"></path>
+                        </svg>
+                        <h4>Dry</h4><p>30s</p>
+                    </div>
+
+
+                <div onclick="handlePresetButton(event)" class="preset-item">
+                    <div class="title">
+                        <h3>Preset 1</h3>
+                        <div class="preset-svg-container">
+                            <svg onmouseleave="handleCheckHoverLeave(event)" onmouseover="handleCheckHover(event)" onclick="handleSelectPreset(event)" class="check" width="40" height="40" fill="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.664 5.253a1 1 0 0 1 .083 1.411l-10.666 12a1 1 0 0 1-1.495 0l-5.333-6a1 1 0 0 1 1.494-1.328l4.586 5.159 9.92-11.16a1 1 0 0 1 1.411-.082Z"></path>
+                            </svg>
+                            <svg class="arrow" width="40" height="40" fill="#ffffff" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m4.594 8.912 6.553 7.646a1.126 1.126 0 0 0 1.708 0l6.552-7.646c.625-.73.107-1.857-.854-1.857H5.447c-.961 0-1.48 1.127-.853 1.857Z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="properties">
+                        <p>Wash time: <span>30s</span></p>
+                        <p>UV time: <span>30s</span></p>
+                        <p>Dry time: <span>20s</span></p>
+                    </div>
+                </div>

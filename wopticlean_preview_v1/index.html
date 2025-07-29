@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.1s ease-in-out    ;
+        }
+        img{
+            height: 100vh;
+            opacity: 0;
+        }body{
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+            align-items: center;
+            background-color: #363636;
+        }
+        .CONTAINER{
+            top:50vh;
+            left:50vw;
+            transform: translate(-50%,-50%);
+            border-radius: 1vw;
+            background-color: #181818;
+            position: absolute;
+            width: 80vw;
+            height: 30vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2vh 2vw;
+            gap:2vw;
+        }
+        .CONTAINER>h1{
+            text-align: center;
+            align-content: center;
+            border-radius: 1vw;
+            flex-grow: 1;
+            color:white;
+            height: 100%;
+            background-color: #363636;
+        }
+        .CONTAINER>h1:hover{
+            background-color: #353f3f;
+            cursor: pointer;
+        }
+        </style>
+    <body>
+        <img src="pg1.png"/>
+        <div class="CONTAINER">
+            <h1 onclick="PC()">PC</h1>
+            <h1 onclick="Phone()">Phone</h1>
+        </div>
+        <script async defer>
+
+            let pg = 1;
+            let max = 6;
+            let maxp=5;
+
+            let admove = (device) =>{
+                let format = device === 'phone' ? 'pgp' : 'pg';
+                document.querySelector('img').style.opacity = 1;
+                document.querySelector('img').src = `${format}${pg}.png`;
+                document.querySelector('.CONTAINER').style.display = 'none';
+                window.addEventListener('keypress', (e) => {
+                    console.log(e.key);
+                    if (e.key === 'd'   || e.key === 'D' ) {
+                        e.preventDefault();
+                        if(pg<(device === 'phone' ? maxp : max)) pg++;
+                        document.querySelector('img').src = `${format}${pg}.png`;
+                    } else if (e.key === 'a' || e.key === 'A') {
+                        e.preventDefault();
+                        if(pg>1) pg--;
+                        document.querySelector('img').src = `${format}${pg}.png`;  
+                    }
+                });
+            }
+            let Phone = () =>{
+                admove('phone');
+                window.addEventListener('touchstart', function (e) {
+                if ( e.touches[0].clientX < window.innerWidth / 2) {
+                    if(pg>1) pg--;  
+                    document.querySelector('img').src = `pgp${pg}.png`; 
+                } else {
+                    if(pg<maxp) pg++;
+                    document.querySelector('img').src = `pgp${pg}.png`;
+                }
+                });
+            }
+            let PC = () => admove('pc')
+        </script>
+    </body>
+</html>

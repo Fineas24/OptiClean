@@ -1,0 +1,179 @@
+:root{
+    --login-container-border-radius:1rem;
+    --login-container-width:25vw;
+    --login-container-height:70vh;
+
+    
+  --text-thin: 400;
+  --text-bold: 600;
+
+    --body-bg-color: #283c44;
+  --body-bg-image: url("https://transparenttextures.com/patterns/carbon-fibre.png");
+  --body-font-family: 'Roboto Mono', monospace;
+
+    --gradient-cyan: linear-gradient(73deg, var(--color-light-cyan) 0%, var(--color-dark-cyan) 100%);
+  --color-light-cyan: rgb(219, 130, 203);
+  --color-dark-cyan: rgb(121, 51, 103);
+  --color-white: white;
+}
+body {
+    overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--body-bg-color);
+  background-image: var(--body-bg-image)
+}
+
+* {
+  user-select: none;
+  font-family: var(--body-font-family);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-weight: var(--text-thin);
+}
+.login-container{
+    color: var(--color-white);
+  position: absolute;
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+  height: var(--login-container-height);
+  width: var( --login-container-width);
+  opacity: 1;
+  border-radius: var(--login-container-border-radius);
+  transition: opacity .2s, width .2s;
+}
+.login-container::before{
+  opacity: 1;
+}
+.login-container::before {
+    border-radius: var(--login-container-border-radius);
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-cyan);
+  opacity: .8;
+  z-index: -1;
+  transition: opacity .2s;
+}
+.choose-login-div{
+    transition: opacity .2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.choose-login-div>h1, .log-in-div > h1, .sign-up-div > h1
+{
+    font-size: clamp(.8rem, 1.7rem, 2.2rem);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: calc(30 / 100 * var(--login-container-height));
+}
+.login-option{
+    cursor: pointer;
+    height: calc(25 / 100 * var(--login-container-height));
+    background-color: rgba(0, 0, 0, 0.35);
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--login-container-border-radius);
+    font-size: clamp(1rem, 1.5rem, 2rem);
+    margin: 1rem;
+    transition: background-color .1s ease-in-out;
+}
+.login-option:hover{
+    background-color: rgba(0, 0, 0, 0.4);
+}
+@media (max-width: 1200px) {
+    .login-container{
+        width:80vw;
+    }
+}
+.hidden{opacity: 0;pointer-events: none;z-index: -10000;display: none;}
+.log-in-div{
+        transition: opacity .2s ease-in-out;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.input-div-username,.input-div-password,.input-div-repeat-password{
+    width: 70%;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.input-div-username::before{
+    content:"Username";
+    width:fit-content;
+    height: 1vh;
+    position: absolute;
+    color:#ffffff;
+    top:-2vh;
+}
+.input-div-password::before{
+    content:"Password";
+    width:fit-content;
+    height: 1vh;
+    position: absolute;
+    color:#ffffff;
+    top:-2vh;
+}
+.input-div-repeat-password::before{
+    content:"Repeat Password";
+    width:fit-content;
+    height: 1vh;
+    position: absolute;
+    color:#ffffff;
+    top:-2vh;
+}
+.login-input{
+    margin-bottom: 2vh;
+    background-color: rgb(236, 236, 236);
+    padding: 2rem;
+    border: none;
+    outline: none;
+    width:100%;
+    height: 6vh;
+    border-radius: 0 var(--login-container-border-radius) var(--login-container-border-radius) var(--login-container-border-radius);
+}
+.login-submit-but{
+    float: bottom;
+    width: 80%;
+    background-color: rgba(0, 0, 0, 0.35);
+    height: 5vh;
+    border-radius: var(--login-container-border-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: absolute;
+    bottom: 2vh;
+}
+.login-submit-but:hover{
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.sign-up-div{
+            transition: opacity .2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.back-arrow{
+    cursor: pointer;
+    transform: rotate(180deg);
+    position: absolute;
+    top:1vh;
+    left:2vh;
+    width: clamp(1.7rem, 3vw, 3rem);
+    height: clamp(1.7rem, 3vw, 3rem);;
+    transition: filter .1s ease-in-out;
+}
+.back-arrow:hover{
+    filter: brightness(.8);
+}
